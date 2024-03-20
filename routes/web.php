@@ -34,4 +34,6 @@ Route::prefix('/user')->group(function () {
 
 Route::prefix('/kategori')->group(function () {
     Route::get('/', [KategoriControrller::class, 'index']);
+    Route::get('/create', [KategoriControrller::class, 'create']);
+    Route::post('/', [KategoriControrller::class, 'store']);
 });
