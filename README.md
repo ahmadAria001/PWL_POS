@@ -321,3 +321,187 @@ class UserController extends Controller
 2. Hasil
    <br>![alt text](image-9.png)<br>
     > data tampil sesuai dengan jumlah yg ada di database
+
+### Praktikum 2.4 – Retreiving or Creating Models
+
+1. Ubah file controller dengan nama UserController.php dan ubah script seperti gambar
+   di bawah ini
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+    function index()
+    {
+        $user = UserModel::firstOrCreate([
+            'username' => 'manager',
+            'nama' => 'Manager',
+        ]);
+        return view('user', ['data' => $user]);
+    }
+}
+```
+
+2. Ubah kembali file view dengan nama user.blade.php dan ubah script seperti gambar di
+   bawah ini
+
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Level</title>
+</head>
+<body>
+    <h1>Data Level Pengguna</h1>
+    <table border="1" cellpadding="2" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Nama</th>
+            <th>ID Level Pengguna</th>
+        </tr>
+        <tr>
+            <td>{{$data->user_id}}</td>
+            <td>{{$data->username}}</td>
+            <td>{{$data->nama}}</td>
+            <td>{{$data->level_id}}</td>
+        </tr>
+    </table>
+</body>
+</html>
+```
+
+3. amati
+   apa yang terjadi dan beri penjelasan dalam laporan <br>
+   ![alt text](image-10.png)<br>
+    > Tidak ada perubahan pada database karena data sudah ketemu, sehingga tidak perlu create.
+4. Ubah file controller dengan nama UserController.php dan ubah script seperti gambar
+   di bawah ini <br>
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+    function index()
+    {
+        $user = UserModel::firstOrCreate([
+            'username' => 'manager22',
+            'nama' => 'Manager Dua Dua',
+            'password' => Hash::make('1234'),
+            'level_id' => 2
+        ]);
+        return view('user', ['data' => $user]);
+    }
+}
+```
+
+5. Simpan kode program Langkah 4. Kemudian jalankan pada browser dan amati apa yang
+   terjadi dan cek juga pada phpMyAdmin pada tabel m_user serta beri penjelasan dalam
+   laporan <br>
+   ![alt text](image-11.png)<br>
+   ![alt text](image-12.png)<br>
+    > Akan dibuat record baru dikarenakan find tidak bisa ditemukan
+6. Ubah file controller dengan nama UserController.php dan ubah script seperti gambar
+   di bawah ini
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+    function index()
+    {
+        $user = UserModel::firstOrNew([
+            'username' => 'manager',
+            'nama' => 'Manager',
+        ]);
+        return view('user', ['data' => $user]);
+    }
+}
+```
+
+7. Simpan kode program Langkah 6. Kemudian jalankan pada browser dan amati apa yang
+   terjadi dan beri penjelasan dalam laporan <br>
+   ![alt text](image-13.png)<br>
+    > Karena data ditemukan maka tidak akan membuat sebuah record dan tidak harus di save()
+8. Ubah file controller dengan nama UserController.php dan ubah script seperti gambar
+   di bawah ini
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+    function index()
+    {
+        $user = UserModel::firstOrNew([
+            'username' => 'manager33',
+            'nama' => 'Manager Tiga Tiga',
+            'password' => Hash::make('12345'),
+            'level_id' => 2
+        ]);
+        return view('user', ['data' => $user]);
+    }
+}
+```
+
+9. Simpan kode program Langkah 8. Kemudian jalankan pada browser dan amati apa yang
+   terjadi dan cek juga pada phpMyAdmin pada tabel m_user serta beri penjelasan dalam
+   laporan <br>
+   ![alt text](image-14.png)<br>
+   ![alt text](image-15.png)<br>
+    > data akan tampil tetapi tidak disimpan kedalam database
+10. Ubah file controller dengan nama UserController.php dan ubah script seperti gambar
+    di bawah ini
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+    function index()
+    {
+        $user = UserModel::firstOrNew([
+            'username' => 'manager33',
+            'nama' => 'Manager Tiga Tiga',
+            'password' => Hash::make('12345'),
+            'level_id' => 2
+        ]);
+        $user->save();
+
+        return view('user', ['data' => $user]);
+    }
+}
+```
+
+11. Simpan kode program Langkah 9. Kemudian jalankan pada browser dan amati apa yang
+    terjadi dan cek juga pada phpMyAdmin pada tabel m_user serta beri penjelasan dalam
+    laporan <br>
+    ![alt text](image-16.png)<br>
+    ![alt text](image-17.png)<br>
+    > Hasil seperti diatas, terdapat ID dan ada record baru di database. Dikarenakan fungsi save() digunakan untuk membuat record baru.
