@@ -21,3 +21,19 @@
             'icon' => 'far fa-fw fa-folder',
         ],
 ```
+
+## 3. Tambahkan action edit di datatables dan buat halaman edit serta controllernya
+
+-   halaman awal<br>
+    ![alt text](image-1.png)<br>
+-   Edit
+    ![alt text](image-2.png)<br>
+-   Hasil
+    ![alt text](image-3.png)<br>
+
+## 4. Tambahkan action delete di datatables serta controllernya
+
+-   halaman awal<br>
+    ![alt text](image-4.png)
+-   Hasil <br>
+    ![alt text](image-5.png)

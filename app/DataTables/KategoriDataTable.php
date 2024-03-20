@@ -22,7 +22,13 @@ class KategoriDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'kategori.action')
+            ->addColumn('Edit', function ($row) {
+                return '<a class="edit btn btn-primary btn-sm" href="' . route('kategori.edit', $row->kategori_id) . '">edit</a>';
+            })
+            ->addColumn('Delete', function ($row) {
+                return '<a class="edit btn btn-danger btn-sm" href="' . route('kategori.delete', $row->kategori_id) . '">delete</a>';
+            })
+            ->rawColumns(['Edit', 'Delete'])
             ->setRowId('id');
     }
 
@@ -62,17 +68,25 @@ class KategoriDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            /*
-Column::computed('action')
-->exportable(false)
-->printable(false)
-->width(60)
-->addClass('text-center'), */
             Column::make('kategori_id'),
             Column::make('kategori_kode'),
             Column::make('kategori_nama'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('Edit')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass(
+                    'text-center'
+                ),
+            Column::computed('Delete')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass(
+                    'text-center'
+                ),
         ];
     }
 

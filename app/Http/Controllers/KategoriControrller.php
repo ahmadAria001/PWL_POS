@@ -27,4 +27,32 @@ class KategoriControrller extends Controller
         ]);
         return redirect('/kategori');
     }
+
+    /**
+     * Return to edit page
+     */
+    function edit($id)
+    {
+        return view('kategori.edit', ['data' => Kategori::find($id)]);
+    }
+
+    /**
+     * Update kategori data
+     */
+    public function update(Request $request, $id)
+    {
+        $kategori = Kategori::find($id);
+        $kategori->kategori_kode = $request->kategori_kode;
+        $kategori->kategori_nama = $request->kategori_nama;
+
+        $kategori->save();
+        return redirect('/kategori');
+    }
+
+    function destroy($id)
+    {
+        Kategori::find($id)->delete();
+
+        return redirect('/kategori');
+    }
 }

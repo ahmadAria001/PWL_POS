@@ -36,6 +36,9 @@ Route::prefix('/kategori')->group(function () {
     Route::get('/', [KategoriControrller::class, 'index']);
     Route::get('/create', [KategoriControrller::class, 'create']);
     Route::post('/', [KategoriControrller::class, 'store']);
+    Route::get('/edit/{id}', [KategoriControrller::class, 'edit'])->name('kategori.edit');
+    Route::put('/update/{id}', [KategoriControrller::class, 'update'])->name('kategori.update');
+    Route::get('/delete/{id}', [KategoriControrller::class, 'destroy'])->name('kategori.delete');
 });
 
 // Auth::routes();
