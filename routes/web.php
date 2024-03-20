@@ -22,9 +22,12 @@ Route::get('/', function () {
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriControrller::class, 'index']);
-Route::get('/user', [UserControrller::class, 'index']);
-Route::get('/user/tambah', [UserControrller::class, 'tambah']);
-Route::post('/user/tambah_simpan', [UserControrller::class, 'tambah_simpan']);
-Route::get('/user/ubah/{id}', [UserControrller::class, 'ubah']);
-Route::put('/user/ubah_simpan/{id}', [UserControrller::class, 'ubah_simpan']);
-Route::get('/user/hapus/{id}', [UserControrller::class, 'hapus']);
+
+Route::prefix('/user')->group(function () {
+    Route::get('/', [UserControrller::class, 'index']);
+    Route::get('/tambah', [UserControrller::class, 'tambah']);
+    Route::post('/tambah_simpan', [UserControrller::class, 'tambah_simpan']);
+    Route::get('/ubah/{id}', [UserControrller::class, 'ubah']);
+    Route::put('/ubah_simpan/{id}', [UserControrller::class, 'ubah_simpan']);
+    Route::get('/hapus/{id}', [UserControrller::class, 'hapus']);
+});
