@@ -31,3 +31,7 @@ Route::prefix('/user')->group(function () {
     Route::put('/ubah_simpan/{id}', [UserControrller::class, 'ubah_simpan']);
     Route::get('/hapus/{id}', [UserControrller::class, 'hapus']);
 });
+
+Route::prefix('/kategori')->group(function () {
+    Route::get('/', [KategoriControrller::class, 'index']);
+});
