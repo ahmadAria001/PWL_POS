@@ -37,3 +37,11 @@ Route::prefix('/kategori')->group(function () {
     Route::get('/create', [KategoriControrller::class, 'create']);
     Route::post('/', [KategoriControrller::class, 'store']);
 });
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
