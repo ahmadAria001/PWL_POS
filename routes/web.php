@@ -41,6 +41,15 @@ Route::prefix('/kategori')->group(function () {
     Route::get('/delete/{id}', [KategoriControrller::class, 'destroy'])->name('kategori.delete');
 });
 
+Route::prefix('/level')->group(function () {
+    Route::get('/', [LevelController::class, 'index']);
+    Route::get('/create', [LevelController::class, 'create']);
+    Route::post('/', [LevelController::class, 'store']);
+    Route::get('/edit/{id}', [LevelController::class, 'edit'])->name('level.edit');
+    Route::put('/update/{id}', [LevelController::class, 'update'])->name('level.update');
+    Route::get('/delete/{id}', [LevelController::class, 'destroy'])->name('level.delete');
+});
+
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

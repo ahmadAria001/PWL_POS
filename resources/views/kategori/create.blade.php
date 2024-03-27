@@ -16,12 +16,20 @@
             <form method="post" action="../kategori">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="kodeKategori">Kode Kategori</label>
-                        <input type="text" class="form-control" id="kodeKategori" name="kodeKategori" placeholder="untuk barang, contoh : AOC0">
+                        <label for="kategori_kode">Kode Kategori</label>
+                        <input type="text" class=" form-control" id="kategori_kode" name="kategori_kode"
+                            placeholder="untuk barang, contoh : AOC0">
                     </div>
+                    @error('kategori_kode')
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                     <div class="form-group">
-                        <label for="namaKategori">Nama Kategori</label>
-                        <input type="text" class="form-control" id="namaKategori" name="namaKategori" placeholder="Nama">
+                        <label for="kategori_nama">Nama Kategori</label>
+                        <input type="text" class="form-control" id="kategori_nama" name="kategori_nama"
+                            placeholder="Nama">
+                        @error('kategori_nama')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="card-footer">

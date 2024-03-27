@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\KategoriDataTable;
+use App\Http\Requests\StorePostRequest;
 use App\Models\Kategori;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UpdatePostRequest;
 
 class KategoriControrller extends Controller
 {
@@ -20,23 +19,11 @@ class KategoriControrller extends Controller
         return view('kategori.create');
     }
 
-    function store(Request $request)
+    function store(StorePostRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'kodeKategori' => 'required',
-            'namaKategori' => 'required',
-        ]);
+        $validated = $request->safe()->only(['kategori_kode', 'kategori_nama']);
 
-        if ($validator->fails()) {
-            return redirect('/kategori/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        Kategori::create([
-            'kategori_kode' => $request->kodeKategori,
-            'kategori_nama' => $request->namaKategori,
-        ]);
+        Kategori::create($validated);
         return redirect('/kategori');
     }
 
@@ -51,13 +38,10 @@ class KategoriControrller extends Controller
     /**
      * Update kategori data
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
-        $kategori = Kategori::find($id);
-        $kategori->kategori_kode = $request->kategori_kode;
-        $kategori->kategori_nama = $request->kategori_nama;
-
-        $kategori->save();
+        $validated = $request->safe()->only(['kategori_kode', 'kategori_nama']);
+        Kategori::find($id)->update($validated);
         return redirect('/kategori');
     }
 
