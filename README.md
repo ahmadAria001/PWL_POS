@@ -133,8 +133,17 @@ class StorePostRequest extends FormRequest
 ## Tugas
 
 1. Coba tampilkan level_id pada halaman web tersebut dimana field ini merupakan foreign key
-   ![alt text](image-16.png)<br>
-   ![alt text](image-17.png)<br>
-   ![alt text](image-18.png)<br>
+    - ![alt text](image-16.png)<br>
+    - ![alt text](image-17.png)<br>
+    - ![alt text](image-18.png)<br>
 2. Modifikasi dengan tema/ template kesukaan Anda
+    > Saya menyesuaikan dengan tema awal dari AdminLTE
+    - Home
+      ![alt text](image-19.png)
+    - Add
+      ![alt text](image-20.png)
+    - Show
+      ![alt text](image-21.png)
+    - Edit
+      ![alt text](image-22.png)
 3. Apa fungsi $request->validate, $error dan alert yang ada pada halaman CRUD tersebut
