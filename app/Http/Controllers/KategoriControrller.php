@@ -6,6 +6,7 @@ use App\DataTables\KategoriDataTable;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class KategoriControrller extends Controller
 {
@@ -21,6 +22,17 @@ class KategoriControrller extends Controller
 
     function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'kodeKategori' => 'required',
+            'namaKategori' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/kategori/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         Kategori::create([
             'kategori_kode' => $request->kodeKategori,
             'kategori_nama' => $request->namaKategori,
