@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KategoriControrller;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserControrller;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriControrller::class, 'index']);
 
 Route::prefix('/user')->group(function () {
@@ -49,6 +49,8 @@ Route::prefix('/level')->group(function () {
     Route::put('/update/{id}', [LevelController::class, 'update'])->name('level.update');
     Route::get('/delete/{id}', [LevelController::class, 'destroy'])->name('level.delete');
 });
+
+Route::resource('m_user', POSController::class);
 
 // Auth::routes();
 

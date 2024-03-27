@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class POSController extends Controller
@@ -11,7 +13,8 @@ class POSController extends Controller
      */
     public function index()
     {
-        //
+        $useri = UserModel::all();
+        return view('m_user.index', compact('useri'))->with('i');
     }
 
     /**
@@ -19,7 +22,7 @@ class POSController extends Controller
      */
     public function create()
     {
-        //
+        return view('m_user.create');
     }
 
     /**
@@ -27,7 +30,18 @@ class POSController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'user_id' => 'max 20',
+            'username' => 'required',
+            'nama' => 'required',
+        ]);
+
+        //fungsi eloquent untuk menambah data
+        UserModel::create($request->all());
+
+        return redirect()->route('m_user.index')
+            ->with('success', 'user Berhasil Ditambahkan');
     }
 
     /**
@@ -35,7 +49,8 @@ class POSController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $useri = UserModel::findOrFail($id);
+        return view('m_user.show', compact('useri'));
     }
 
     /**
@@ -43,7 +58,8 @@ class POSController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $useri = UserModel::find($id);
+        return view('m_user.edit', compact('useri'));
     }
 
     /**
@@ -51,7 +67,16 @@ class POSController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'username' => 'required',
+            'nama' => 'required',
+            'password' => 'required',
+        ]);
+        //fungsi eloquent untuk mengupdate data inputan kita
+        UserModel::find($id)->update($request->all());
+        //jika data berhasil diupdate, akan kembali ke halaman utama
+        return redirect()->route('m_user.index')
+            ->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -59,6 +84,8 @@ class POSController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = UserModel::findOrFail($id)->delete();
+        return \redirect()->route('m_user.index')
+            ->with('success', 'data Berhasil Dihapus');
     }
 }

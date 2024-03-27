@@ -327,6 +327,11 @@ return [
             'url' => 'kategori',
             'icon' => 'far fa-fw fa-folder',
         ],
+        [
+            'text' => 'Manage User',
+            'url' => 'm_user',
+            'icon' => 'fas fa-fw fa-user',
+        ],
         // ['header' => 'account_settings'],
         [
             //     'text' => 'profile',

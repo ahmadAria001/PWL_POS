@@ -113,3 +113,19 @@ class StorePostRequest extends FormRequest
     }
 }
 ```
+
+-   Hasil
+    ![alt text](image-10.png)<br>
+
+## D. CRUD(create, read, update, delete
+
+-   Halaman awal m_user<br>
+    ![alt text](image-11.png)
+-   Halaman input user<br>
+    ![alt text](image-12.png)
+-   Halaman show user<br>
+    ![alt text](image-13.png)
+-   Halaman edit user<br>
+    ![alt text](image-14.png)
+-   Notif delete user<br>
+    ![alt text](image-15.png)
