@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+/**
+ * @mixin IdeHelperKategori
+ */
 class LevelModel extends Model
 {
     use HasFactory;
