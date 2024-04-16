@@ -24,11 +24,13 @@ Route::get('/kategori', [KategoriControrller::class, 'index']);
 
 Route::prefix('/user')->group(function () {
     Route::get('/', [UserControrller::class, 'index']);
-    Route::get('/tambah', [UserControrller::class, 'tambah']);
-    Route::post('/tambah_simpan', [UserControrller::class, 'tambah_simpan']);
-    Route::get('/ubah/{id}', [UserControrller::class, 'ubah']);
-    Route::put('/ubah_simpan/{id}', [UserControrller::class, 'ubah_simpan']);
-    Route::get('/hapus/{id}', [UserControrller::class, 'hapus']);
+    Route::post('/list', [UserControrller::class, 'list']);
+    Route::get('/create', [UserControrller::class, 'create']);
+    Route::post('/', [UserControrller::class, 'store']);
+    Route::get('/{id}', [UserControrller::class, 'show']);
+    Route::get('/{id}/edit', [UserControrller::class, 'edit']);
+    Route::put('/{id}', [UserControrller::class, 'update']);
+    Route::delete('/{id}', [UserControrller::class, 'destroy']);
 });
 
 Route::prefix('/kategori')->group(function () {
