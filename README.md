@@ -156,4 +156,7 @@ function index()
 
 4. Apa fungsi dan tujuan dari variable $activeMenu ?
 > variabel tersebut digunakan untuk menentukan style yang akan digunakan di bagian sidebar atau dalam kata lain
-> digunakan untuk menampilkan menu yang sedang di pilih saat ini 
+> digunakan untuk menampilkan menu yang sedang di pilih saat ini
+
+## F. Tugas
+

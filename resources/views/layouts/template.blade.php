@@ -48,7 +48,9 @@
             @include('layouts.breadcrumb')
 
             <!-- Main content -->
-            @yield('content')
+            <div class="container-fluid overflow-hidden">
+                @yield('content')
+            </div>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
