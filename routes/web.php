@@ -4,6 +4,7 @@ use App\Http\Controllers\KategoriControrller;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserControrller;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index']);
 
 Route::get('/kategori', [KategoriControrller::class, 'index']);
 
