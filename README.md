@@ -107,21 +107,38 @@ function index()
 ```
 - Hasil<br>
 ![img.png](assets/image-js7-3.png)
+
 - Create <br>
 ![img.png](assets/image-js7-4.png)
+
 - Hasil create<br>
 ![img.png](assets/image-js7-5.png)
 > Disini saya menambahkan pelanggan12 dengan nama Ahmad Soerjo dan hasilnya sukses tersimpan di database
 - Hasil show<br>
 ![img.png](assets/image-js7-6.png)
 > Hasilnya sesuai, data user ditampilkan dengan benar
+
 - Hasil edit<br>
 ![img.png](assets/image-js7-7.png)
 ![img.png](assets/image-js7-8.png)
 > Disini saya mengganti nama dari pelanggan12 menjadi Ahmad Soerjo Raharjo dan berhasil
+
 - Hasil delete<br>
 ![img.png](assets/image-js7-9.png)
+
 >Disini saya mencoba menghapus manager 56<br>
 ![img.png](assets/image-js7-10.png)
 > Hasilnya user manager 56 berhasil di hapus
 
+## D. Data Searching and Filtering
+- Hasil filtering <br>
+![img.png](assets/image-js7-11.png)
+
+## E. Pertanyaan
+1. Apa perbedaan frontend template dengan backend template?
+>
+2. Apakah layouting itu penting dalam membangun sebuah website?
+>
+3. Jelaskan fungsi dari komponen laravel blade berikut : @include(), @extend(), @section(), @push(), @yield(), dan @stack()
+>
+4. Apa fungsi dan tujuan dari variable $activeMenu ?
