@@ -19,7 +19,7 @@ class PenjualanDetailSeeder extends Seeder
         for ($i = 1; $i <= 30; $i++) {
             $tempBarangId = random_int(1, 10);
             $data[] = [
-                'penjualan_id' => $i % 3 == 0 ? $idIterator++ : $idIterator,
+                'penjualan_id' => $i % 3 == 0 ? $idIterator++: $idIterator,
                 'barang_id' => $tempBarangId,
                 'harga' => $barangData->where('barang_id', $tempBarangId)->value('harga_jual'),
                 'jumlah' => random_int(1, 20),

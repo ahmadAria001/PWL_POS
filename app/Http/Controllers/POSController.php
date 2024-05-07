@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Models\User;
-use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class POSController extends Controller
@@ -11,10 +11,9 @@ class POSController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
-        $useri = UserModel::all();
-        return view('m_user.index', compact('useri'))->with('i');
+        return $dataTable->render('m_user.index');
     }
 
     /**
@@ -35,10 +34,12 @@ class POSController extends Controller
             'user_id' => 'max 20',
             'username' => 'required',
             'nama' => 'required',
+            'password' => 'required',
+            'level_id' => 'required'
         ]);
 
         //fungsi eloquent untuk menambah data
-        UserModel::create($request->all());
+        User::create($request->all());
 
         return redirect()->route('m_user.index')
             ->with('success', 'user Berhasil Ditambahkan');
@@ -49,7 +50,7 @@ class POSController extends Controller
      */
     public function show(string $id)
     {
-        $useri = UserModel::findOrFail($id);
+        $useri = User::findOrFail($id);
         return view('m_user.show', compact('useri'));
     }
 
@@ -58,7 +59,7 @@ class POSController extends Controller
      */
     public function edit(string $id)
     {
-        $useri = UserModel::find($id);
+        $useri = User::find($id);
         return view('m_user.edit', compact('useri'));
     }
 
@@ -73,7 +74,7 @@ class POSController extends Controller
             'password' => 'required',
         ]);
         //fungsi eloquent untuk mengupdate data inputan kita
-        UserModel::find($id)->update($request->all());
+        User::find($id)->update($request->all());
         //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('m_user.index')
             ->with('success', 'Data Berhasil Diupdate');
@@ -84,7 +85,7 @@ class POSController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = UserModel::findOrFail($id)->delete();
+        User::findOrFail($id)->delete();
         return \redirect()->route('m_user.index')
             ->with('success', 'data Berhasil Dihapus');
     }

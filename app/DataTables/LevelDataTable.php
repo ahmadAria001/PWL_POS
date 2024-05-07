@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\Level;
-use App\Models\LevelModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -23,20 +22,20 @@ class LevelDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('Edit', function ($row) {
-                return '<a class="edit btn btn-primary btn-sm" href="' . route('level.edit', $row->level_id) . '">edit</a>';
-            })
-            ->addColumn('Delete', function ($row) {
-                return '<a class="edit btn btn-danger btn-sm" href="' . route('level.delete', $row->level_id) . '">delete</a>';
-            })
-            ->rawColumns(['Edit', 'Delete'])
-            ->setRowId('id');
+        ->addColumn('Edit', function ($row) {
+            return '<a class="edit btn btn-primary btn-sm" href="' . route('level.edit', $row->level_id) . '">edit</a>';
+        })
+        ->addColumn('Delete', function ($row) {
+            return '<a class="edit btn btn-danger btn-sm" href="' . route('level.delete', $row->level_id) . '">delete</a>';
+        })
+        ->rawColumns(['Edit', 'Delete'])
+        ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(LevelModel $model): QueryBuilder
+    public function query(Level $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -47,20 +46,20 @@ class LevelDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('level-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            //->dom('Bfrtip')
-            ->orderBy(1)
-            ->selectStyleSingle()
-            ->buttons([
-                Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            ]);
+                    ->setTableId('level-table')
+                    ->columns($this->getColumns())
+                    ->minifiedAjax()
+                    //->dom('Bfrtip')
+                    ->orderBy(1)
+                    ->selectStyleSingle()
+                    ->buttons([
+                        Button::make('excel'),
+                        Button::make('csv'),
+                        Button::make('pdf'),
+                        Button::make('print'),
+                        Button::make('reset'),
+                        Button::make('reload')
+                    ]);
     }
 
     /**

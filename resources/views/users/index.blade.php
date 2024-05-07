@@ -41,6 +41,17 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <!-- @foreach ($user as $item) -->
+                    <!--     <td>{{ $item->id }}</td> -->
+                    <!--     <td>{{ $item->username }}</td> -->
+                    <!--     <td>{{ $item->nama }}</td> -->
+                    <!--     <td> -->
+                    <!--         {{ $item->level->level_nama }} -->
+                    <!--     </td> -->
+                    <!--     <td>{{ $item->actions }}</td> -->
+                    <!-- @endforeach -->
+                </tbody>
             </table>
         </div>
     </div>

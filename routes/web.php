@@ -1,10 +1,16 @@
 <?php
 
-use App\Http\Controllers\KategoriControrller;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\POSController;
-use App\Http\Controllers\UserControrller;
+use App\Http\Controllers\StokController;
+use App\Http\Controllers\TransaksiPenjualanController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,37 +26,51 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index']);
 
-Route::get('/kategori', [KategoriControrller::class, 'index']);
-
+// Prefix untuk route terkait pengguna (user)
 Route::prefix('/user')->group(function () {
-    Route::get('/', [UserControrller::class, 'index']);
-    Route::post('/list', [UserControrller::class, 'list']);
-    Route::get('/create', [UserControrller::class, 'create']);
-    Route::post('/', [UserControrller::class, 'store']);
-    Route::get('/{id}', [UserControrller::class, 'show']);
-    Route::get('/{id}/edit', [UserControrller::class, 'edit']);
-    Route::put('/{id}', [UserControrller::class, 'update']);
-    Route::delete('/{id}', [UserControrller::class, 'destroy']);
+    Route::get('/', [UserController::class, 'index']);
+    Route::post('/list', [UserController::class, 'list']);
+    Route::get('/create', [UserController::class, 'create']);
+    Route::post('/', [UserController::class, 'store']);
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::get('/{id}/edit', [UserController::class, 'edit']);
+    Route::put('/{id}', [UserController::class, 'update']);
+    Route::delete('/{id}', [UserController::class, 'destroy']);
 });
 
-Route::prefix('/kategori')->group(function () {
-    Route::get('/', [KategoriControrller::class, 'index']);
-    Route::get('/create', [KategoriControrller::class, 'create']);
-    Route::post('/', [KategoriControrller::class, 'store']);
-    Route::get('/edit/{id}', [KategoriControrller::class, 'edit'])->name('kategori.edit');
-    Route::put('/update/{id}', [KategoriControrller::class, 'update'])->name('kategori.update');
-    Route::get('/delete/{id}', [KategoriControrller::class, 'destroy'])->name('kategori.delete');
-});
+
+// Route resource m_user
+Route::resource('m_user', POSController::class);
 
 Route::resource('level', LevelController::class);
 Route::post('/level/list', [LevelController::class, 'list']);
 
-Route::resource('m_user', POSController::class);
+Route::resource('kategori', KategoriController::class);
+Route::post('/kategori/list', [KategoriController::class, 'list']);
 
-// Auth::routes();
+Route::resource('barang', BarangController::class);
+Route::post('/barang/list', [BarangController::class, 'list']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('stok', StokController::class);
+Route::post('/stok/list', [StokController::class, 'list']);
 
-// Auth::routes();
+Route::resource('penjualan', TransaksiPenjualanController::class);
+Route::post('/penjualan/list', [TransaksiPenjualanController::class, 'list']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// auth
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('proses_register', [AuthController::class, 'proses_register'])->name('proses_register');
+
+// middleware
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['cek_login:1']], function () {
+        Route::resource('admin', AdminController::class);
+    });
+
+    Route::group(['middleware' => ['cek_login:2']], function () {
+        Route::resource('manager', ManagerController::class);
+    });
+});

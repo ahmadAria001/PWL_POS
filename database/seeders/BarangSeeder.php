@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 class BarangSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * From first to last list: Jeans, T-shirt, Hoodie, accessories, Boxer
      */
     public function run(): void
     {
         $itemNames = [
-            'Levis', 'Emba',
+            'Levis', 'Emba' ,
             'V-Neck Tee', 'Pocket Shirt',
             'Pullover',  'Sleeveless',
             'Woolen Hat', 'Wallet',
@@ -28,9 +28,9 @@ class BarangSeeder extends Seeder
             5, 5
         ];
         $data = [];
-        for ($i = 0; $i < 10; $i++) {
-            $data[] = [
-                'kategori_id' => $kategoriIds[$i],
+        for ($i=0; $i < 10; $i++) {
+            $data[] =[
+                'kategori_id' =>$kategoriIds[$i],
                 'barang_kode' => 'BRG' . $i + 1,
                 'barang_nama' => $itemNames[$i],
                 'harga_beli' => random_int(200, 300),

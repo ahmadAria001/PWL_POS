@@ -8,19 +8,19 @@
             </div>
         </div>
         <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+            @if(session('success'))
+                <div class="alert alert-success">{{session('success')}}</div>
             @elseif(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
+                <div class="alert alert-danger">{{session('error')}}</div>
             @endif
             <table class="table table-bordered table-striped table-hover table-sm" id="table_level">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Level Kode</th>
-                        <th>Level Nama</th>
-                        <th>Aksi</th>
-                    </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Level Kode</th>
+                    <th>Level Nama</th>
+                    <th>Aksi</th>
+                </tr>
                 </thead>
             </table>
         </div>
@@ -30,7 +30,7 @@
 @endpush
 @push('js')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             let dataUser = $('#table_level').DataTable({
                 serverSide: true, // True if we want to use Server side processing
                 ajax: {
@@ -38,7 +38,8 @@
                     "dataType": "json",
                     "type": "POST",
                 },
-                columns: [{
+                columns: [
+                    {
                         data: "DT_RowIndex", // numbering from laravel datatables addIndexColumn() function
                         className: "text-center",
                         orderable: false,
@@ -47,24 +48,23 @@
                     {
                         data: "level_kode",
                         className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
+                        orderable: true,    // orderable: true, if we want this column is orderable
+                        searchable: true,   // searchable: true, if we want this column searchable
                     },
                     {
                         data: "level_nama",
                         className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
+                        orderable: true,    // orderable: true, if we want this column is orderable
+                        searchable: true,   // searchable: true, if we want this column searchable
                     },
                     {
                         data: "aksi",
                         className: "",
-                        orderable: false, // orderable: false, if we want this column not orderable
-                        searchable: false // searchable: false, if we want this column not searchable
+                        orderable: false,	// orderable: false, if we want this column not orderable
+                        searchable: false	// searchable: false, if we want this column not searchable
                     }
                 ]
             });
         });
     </script>
 @endpush
-
